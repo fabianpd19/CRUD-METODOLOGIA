@@ -58,10 +58,10 @@ class ventanaMiesAdmin(ventanaTkinter):
         """self.ventana = tk.Toplevel()"""
 
         '''Propiedades de la ventana'''
-        self.ventana.title("BONO - MIES")
+        self.ventana.title("BASE DE DATOS DPA")
         self.ventana.config(bg="white")
         self.ventana.geometry("1040x500")
-        self.ventana.resizable(width="False", height="False")
+        #self.ventana.resizable(width="False", height="False")
 
         self.tablaDatos()
 
@@ -74,14 +74,14 @@ class ventanaMiesAdmin(ventanaTkinter):
         scrollbarY = Scrollbar (self.ventana, orient = VERTICAL)
         
         #Asignación de columbas de la tabla
-        self.tablaDatos = ttk.Treeview(self.ventana, columns =  ('#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8', '#9', '#10', '#11', '#12'))
+        self.tablaDatos = ttk.Treeview(self.ventana, columns =  ('#1', '#2', '#3', '#4', '#5', '#6', '#7'))
         
         #Propiedades de la tabla (posición y tamaño)
-        self.tablaDatos.place(relx=0.00, rely=0.200, width=1020, height=380)
+        self.tablaDatos.place(relx=0.00, rely=0.200, width=1310, height=535)
 
         #Creación de scrollbars, tanto en eje vertica como en eje horizontal 
-        scrollbarX.place(relx= 0, rely =0.965, width=1020)
-        scrollbarY.place(relx= 0.98, rely =0.0, height=500)
+        scrollbarX.place(relx= 0, rely =0.965, width=1320)
+        scrollbarY.place(relx= 0.98, rely =0.0, height=700)
         
         #Configuración de las scrollbars para sincronizarlas con la tabla
         self.tablaDatos.configure(xscrollcommand=scrollbarX.set, yscrollcommand=scrollbarY.set)
@@ -89,19 +89,14 @@ class ventanaMiesAdmin(ventanaTkinter):
         scrollbarX.configure(command=self.tablaDatos.xview)
 
         #Asignación de propiedades a cada una de las columnas de la tabla
-        self.tablaDatos.heading("#0", text = "Cédula",anchor=W)
-        self.tablaDatos.heading("#1", text = "Nombre",anchor=W)
-        self.tablaDatos.heading("#2", text = "Nombre2",anchor=W)
-        self.tablaDatos.heading("#3", text = "Apellido",anchor=W)
-        self.tablaDatos.heading("#4", text = "Apellido2",anchor=W)
-        self.tablaDatos.heading("#5", text = "Provincia",anchor=W)
-        self.tablaDatos.heading("#6", text = "Cantón",anchor=W)
-        self.tablaDatos.heading("#7", text = "Genero",anchor=W)
-        self.tablaDatos.heading("#8", text = "Estado",anchor=W)
-        self.tablaDatos.heading("#9", text = "Rol",anchor=W)
-        self.tablaDatos.heading("#10", text = "CorreoElectronico",anchor=W)
-        self.tablaDatos.heading("#11", text = "Hijos",anchor=W)
-        self.tablaDatos.heading("#12", text = "Beneficiario",anchor=W)
+        self.tablaDatos.heading("#0", text = "PROV_COD",anchor=W)
+        self.tablaDatos.heading("#1", text = "PROV_DESC",anchor=W)
+        self.tablaDatos.heading("#2", text = "PROV_TAMA",anchor=W)
+        self.tablaDatos.heading("#3", text = "PROV_HAB",anchor=W)
+        self.tablaDatos.heading("#4", text = "PROV_HOMBRES",anchor=W)
+        self.tablaDatos.heading("#5", text = "PROV_MUJERES",anchor=W)
+        self.tablaDatos.heading("#6", text = "PROV_PREFECTO",anchor=W)
+        self.tablaDatos.heading("#7", text = "PROV_FECHA",anchor=W)
 
         #Llamado de funciones para la tabla
         self.insertDatesTable()
@@ -113,124 +108,100 @@ class ventanaMiesAdmin(ventanaTkinter):
         '''
 
         '''Label texto primer nombre'''
-        mostrarLabel=tk.Label(self.ventana, text = "Nombre: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Código: ")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
         mostrarLabel.place(x=0, y=1)
         '''Label texto segundo nombre'''
-        mostrarLabel=tk.Label(self.ventana, text = "Nombre 2: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Nombre: ")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
         mostrarLabel.place(x=0, y=25)
         '''Label texto apellido'''
-        mostrarLabel=tk.Label(self.ventana, text = "Apellido: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Tamaño: ")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
         mostrarLabel.place(x=0, y=50)
         '''Label texto segundo apellido'''
-        mostrarLabel=tk.Label(self.ventana, text = "Apellido 2: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Num. Habitantes:")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
         mostrarLabel.place(x=0, y=75)
         '''Label texto género'''
-        mostrarLabel=tk.Label(self.ventana, text = "Género: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Num. Hombres")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
         mostrarLabel.place(x=200, y=1)
         '''Label texto cédula'''
-        mostrarLabel=tk.Label(self.ventana, text = "Cédula: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Num. Mujeres")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
         mostrarLabel.place(x=200, y=25)
         '''Label texto provincia'''
-        mostrarLabel=tk.Label(self.ventana, text = "Provincia: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Prefecto")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=189, y=50)
+        mostrarLabel.place(x=200, y=50)
         '''Label texto Cantón'''
-        mostrarLabel=tk.Label(self.ventana, text = "Cantón: ")
+        mostrarLabel=tk.Label(self.ventana, text = "Fecha")
         mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
         mostrarLabel.place(x=200, y=75)
-        '''Label texto edad'''
-        mostrarLabel=tk.Label(self.ventana, text = "Edad: ")
-        mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=350, y=1)
-        '''Label correo electrónico'''
-        mostrarLabel=tk.Label(self.ventana, text = "Correo: ")
-        mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=350, y=25)
-        '''Label texto Hijos del usuario'''
-        mostrarLabel=tk.Label(self.ventana, text = "Hijos: ")
-        mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=350, y=75)
-        '''Label texto estados en los que puede estar un usuario'''
-        mostrarLabel=tk.Label(self.ventana, text = "Estado: ")
-        mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=350, y=50)
-        '''Label texto roles de los usuarios existentes'''
-        mostrarLabel=tk.Label(self.ventana, text = "Rol: ")
-        mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=530, y=75)
-        '''Label texto roles de los usuarios existentes'''
-        mostrarLabel=tk.Label(self.ventana, text = "Benefiario: ")
-        mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=650, y=75)
-        '''Label texto, buscar por cédula'''
-        mostrarLabel=tk.Label(self.ventana, text = "Buscar por cédula: ")
-        mostrarLabel.config(bg= "white", fg="#4779b2",font=("Arial", 8, "bold"))
-        mostrarLabel.place(x=750, y=1)
 
         '''Entradas de texto (Entrys)'''
         '''Entrada de texto del primer nombre'''
-        self.nombreEntry=tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.nombreEntry.place(x=65, y=0)
-        '''Entrada de texto del segundo nombre'''
-        self.nombre2Entry = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.nombre2Entry.place(x=65, y=25)
-        '''Entrada de texto del primer apellido'''
-        self.apellidoEntry = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.apellidoEntry.place(x=65, y=50)
-        '''Entrada de texto del segundo apellido'''
-        self.apellido2Entry = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.apellido2Entry.place(x=65, y=75)
-        '''Entrada de texto de la ciudad del usuario'''
-        self.cedulaEntry = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=13, relief="solid")
-        self.cedulaEntry.place(x=250, y=25)
-        '''Entrada de texto de la edad del usuario'''
-        self.edadEntry= tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.edadEntry.place(x=400, y=1)
-        '''Entrada de texto del correo electrónico del usuario'''
-        self.correoElectronico= tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.correoElectronico.place(x=400, y=25)
-        '''Entrada de texto de la cantidad de hijos del usuario'''
-        self.hijosEntry= tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.hijosEntry.place(x=400, y=75)
-        '''Entrada de texto para buscar un usuario por su cédula'''
-        self.buscarCedula = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
-        self.buscarCedula.place(x=870, y=1)
+        x_1 = 100
+        x_2= 300
+        
+        self.PROV_COD=tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_COD.place(x=x_1, y=0)
 
+        self.PROV_DESC = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_DESC.place(x=x_1, y=25)
+ 
+        self.PROV_TAMA = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_TAMA.place(x=x_1, y=50)
+
+        self.PROV_HAB = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_HAB.place(x=x_1, y=75)
+        
+       
+        self.PROV_HOMBRES = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=13, relief="solid")
+        self.PROV_HOMBRES.place(x=x_2, y=0)
+        
+        self.PROV_MUJERES= tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_MUJERES.place(x=x_2, y=25)
+       
+        self.PROV_PREFECTO= tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_PREFECTO.place(x=x_2, y=50)
+        
+        self.PROV_FECHA= tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_FECHA.place(x=x_2, y=75)
+
+        self.elementoEnTabla = tk.Entry(self.ventana, font=font.Font(family="Arial", size = "8"),textvar="", width=15, relief="solid")
+        self.PROV_FECHA.place(x=870, y=5)
+        
         #COMBOBOXS
         '''Menu despegable para elegir la provincia y el cantón del usuario'''
-        self.provinciaEntry = ttk.Combobox(
-            self.ventana, 
-            width=10, 
-            state="readonly",
-            values=tuple(conectarMongo.diccionarioPyC().keys()))
-        self.provinciaEntry.place(x=250, y=50)
-        self.provinciaEntry.bind("<<ComboboxSelected>>", on_combobox_select1)
+        # self.provinciaEntry = ttk.Combobox(
+        #     self.ventana, 
+        #     width=10, 
+        #     state="readonly",
+        #     values=tuple(conectarMongo.diccionarioPyC().keys()))
+        # self.provinciaEntry.place(x=250, y=50)
+        # self.provinciaEntry.bind("<<ComboboxSelected>>", on_combobox_select1)
 
-        '''Menu despegable cantón que dependerá de las opciones de la ventana provincia'''
-        self.cantonEntry = ttk.Combobox(self.ventana, width=10, state="readonly")
-        self.cantonEntry.place(x=250, y=75)
+        # '''Menu despegable cantón que dependerá de las opciones de la ventana provincia'''
+        # self.cantonEntry = ttk.Combobox(self.ventana, width=10, state="readonly")
+        # self.cantonEntry.place(x=250, y=75)
 
-        '''Menú despegable donde mostrará la lista de generos a las que se puede elegir'''
-        self.generoEntry = ttk.Combobox(self.ventana, value= conectarMongo.listaGeneros(), width=8, state="readonly")
-        self.generoEntry.place(x=250, y=1)
+        # '''Menú despegable donde mostrará la lista de generos a las que se puede elegir'''
+        # self.generoEntry = ttk.Combobox(self.ventana, value= conectarMongo.listaGeneros(), width=8, state="readonly")
+        # self.generoEntry.place(x=250, y=1)
 
-        '''Menú despegable donde mostrará la lista de estados a las que se puede elegir'''
-        self.estadoEntry = ttk.Combobox(self.ventana, value= conectarMongo.estadosUsuarios(), width=15, state="readonly")
-        self.estadoEntry.place(x=400, y=50)
+        # '''Menú despegable donde mostrará la lista de estados a las que se puede elegir'''
+        # self.estadoEntry = ttk.Combobox(self.ventana, value= conectarMongo.estadosUsuarios(), width=15, state="readonly")
+        # self.estadoEntry.place(x=400, y=50)
 
-        '''Menú despegable donde mostrará la lista de roles a las que se puede elegir'''
-        self.rolEntry = ttk.Combobox(self.ventana, value= conectarMongo.mostrarRoles(), width=10, state="readonly")
-        self.rolEntry.place(x=560, y=75)
+        # '''Menú despegable donde mostrará la lista de roles a las que se puede elegir'''
+        # self.rolEntry = ttk.Combobox(self.ventana, value= conectarMongo.mostrarRoles(), width=10, state="readonly")
+        # self.rolEntry.place(x=560, y=75)
 
-        '''Menú despegable donde mostrará la lista de beneficiarios a las que se puede elegir'''
-        self.beneficarioEntry = ttk.Combobox(self.ventana, value= conectarMongo.beneficariosUsuarios(), width=10, state="readonly")
-        self.beneficarioEntry.place(x=720, y=75)
+        # '''Menú despegable donde mostrará la lista de beneficiarios a las que se puede elegir'''
+        # self.beneficarioEntry = ttk.Combobox(self.ventana, value= conectarMongo.beneficariosUsuarios(), width=10, state="readonly")
+        # self.beneficarioEntry.place(x=720, y=75)
         
         #BOTONES
 
@@ -280,49 +251,41 @@ class ventanaMiesAdmin(ventanaTkinter):
             self.tablaDatos.delete(dato)
 
         #Llenar las casillas de la tabla con los datos de la base de datos
-        listaDatos = conectarMongo.coleccionPersonas.find()
+        listaEntidadProvincia = conectarMongo.entidadProvincia.find()
         
-        for listaDatos in conectarMongo.coleccionPersonas.find():
+        for listaEntidadProvincia in conectarMongo.entidadProvincia.find():
             '''
             Bucle donde se van a insertar todos los datos que existen en la base de datos
             dentro de la tabla.
             '''
             #Insertamos datos
-            self.tablaDatos.insert("", END, text = (listaDatos["cedula"]), values=(listaDatos["nombre"], 
-            listaDatos["nombre2"],
-            listaDatos["apellido"],
-            listaDatos["apellido2"],
-            listaDatos["provincia"],
-            listaDatos["canton"],
-            listaDatos["genero"],
-            listaDatos["estado"],
-            listaDatos["rol"],
-            listaDatos["correoElectronico"],
-            listaDatos["hijos"],
-            listaDatos["beneficiario"]
+            self.tablaDatos.insert("", END, text = (listaEntidadProvincia["PROV_COD"]), values=( 
+            listaEntidadProvincia["PROV_DESC"],
+            listaEntidadProvincia["PROV_TAMA"],
+            listaEntidadProvincia["PROV_HAB"],
+            listaEntidadProvincia["PROV_HOMBRES"],
+            listaEntidadProvincia["PROV_MUJERES"],
+            listaEntidadProvincia["PROV_PREFECTO"],
+            listaEntidadProvincia["PROV_FECHA"],
             ))
             
-
-    
     def actualizarTabla (self):
         '''
         Actualización de datos dentro de la tabla
         '''
         getDatos(
-                self.nombreEntry.get(),
-                self.nombre2Entry.get(),
-                self.apellidoEntry.get(),
-                self.apellido2Entry.get(),
+                self.PROV_COD.get(),
+                self.PROV_DESC.get(),
+                self.PROV_TAMA.get(),
+                self.PROV_HAB.get(),
                 self.provinciaEntry.get(),
                 self.cantonEntry.get(),
-                self.cedulaEntry.get(),
-                self.edadEntry.get(),
+                self.PROV_HOMBRES.get(),
+                self.PROV_MUJERES.get(),
                 self.generoEntry.get(),
                 self.estadoEntry.get(),
-                self.correoElectronico.get(),
-                self.hijosEntry.get(),
-                self.rolEntry.get(),
-                self.beneficarioEntry.get()
+                self.PROV_PREFECTO.get(),
+                self.PROV_FECHA.get(),
             )
         #Llamamos a la función para actualizar la tabla de datos.
         self.insertDatesTable()
@@ -360,27 +323,27 @@ class ventanaMiesAdmin(ventanaTkinter):
 
         #Llenar las casillas de la tabla con los datos de la base de datos
         query = {'cedula': self.buscarCedula.get()}
-        listaDatos = conectarMongo.coleccionPersonas.find()
+        listaEntidadProvincia = conectarMongo.coleccionPersonas.find()
         specificFind = conectarMongo.coleccionPersonas.find(query)
 
-        for listaDatos in specificFind:
+        for listaEntidadProvincia in specificFind:
             '''
             Bucle donde se van a insertar todos los datos que existen en la base de datos
             dentro de la tabla.
             '''
             #Insertamos datos
-            self.tablaDatos.insert("", END, text = (listaDatos["cedula"]), values=(listaDatos["nombre"], 
-            listaDatos["nombre2"],
-            listaDatos["apellido"],
-            listaDatos["apellido2"],
-            listaDatos["provincia"],
-            listaDatos["canton"],
-            listaDatos["genero"],
-            listaDatos["estado"],
-            listaDatos["rol"],
-            listaDatos["correoElectronico"],
-            listaDatos["hijos"],
-            listaDatos["beneficiario"]
+            self.tablaDatos.insert("", END, text = (listaEntidadProvincia["cedula"]), values=(listaEntidadProvincia["nombre"], 
+            listaEntidadProvincia["nombre2"],
+            listaEntidadProvincia["apellido"],
+            listaEntidadProvincia["apellido2"],
+            listaEntidadProvincia["provincia"],
+            listaEntidadProvincia["canton"],
+            listaEntidadProvincia["genero"],
+            listaEntidadProvincia["estado"],
+            listaEntidadProvincia["rol"],
+            listaEntidadProvincia["PROV_PREFECTO"],
+            listaEntidadProvincia["hijos"],
+            listaEntidadProvincia["beneficiario"]
             ))
         
     def editarDatos(self):
@@ -390,7 +353,7 @@ class ventanaMiesAdmin(ventanaTkinter):
         self.ventaneEditar.resizable(width="False", height="False")
 
 
-def getDatos (nombre, nombre2, apellido, apellido2, provincia, canton, cedula, edad, genero, estado, correoElectronico, hijos, rol, beneficario):
+def getDatos (nombre, nombre2, apellido, apellido2, provincia, canton, cedula, edad, genero, estado, PROV_PREFECTO, hijos, rol, beneficario):
     '''
     Método el cual se encarga validar cada uno de los datos que ingresa un usuario:
     El ingreso de datos personales como nombres o apellidos serán validados que no tengan números
@@ -402,7 +365,7 @@ def getDatos (nombre, nombre2, apellido, apellido2, provincia, canton, cedula, e
                     if validarCedulaRE(cedula): #Validar cédula
                         if validarPyCRE(provincia, canton): #Validar provincia y cantón
                                 if validarEdadRE(edad): #Validar edad
-                                        if validarCorreoRE(correoElectronico): #Validar correo electrónico
+                                        if validarCorreoRE(PROV_PREFECTO): #Validar correo electrónico
                                             if hijos.isnumeric(): #Validar edad
                                                 if validarRol(rol):
                                                     '''
@@ -420,7 +383,7 @@ def getDatos (nombre, nombre2, apellido, apellido2, provincia, canton, cedula, e
                                                                 'genero': genero,
                                                                 'estado': estado,
                                                                 'rol': rol,
-                                                                'correoElectronico': correoElectronico,
+                                                                'PROV_PREFECTO': PROV_PREFECTO,
                                                                 'hijos': hijos,
                                                                 'beneficiario' : beneficario
                                                                 }
@@ -454,4 +417,4 @@ if __name__ == '__main__':
     ventanaAdmin.ventanaControl()
 
     '''Función mainloop'''
-    ventana.mainloop()
+    ventana.mainloop() 

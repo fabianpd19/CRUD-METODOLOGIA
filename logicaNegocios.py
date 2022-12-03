@@ -5,15 +5,6 @@ import pymongo
 myClient = pymongo.MongoClient("mongodb://localhost:27017/")
 #Colecciones de MongoDB
 
-MONGO_BASED = "bono-mies-data"
-COLECCION_PERSONAS = "personas_bono_mies"
-COLECCION_PYC = "provincias_cantones"
-COLECCTION_ROLES = "roles_bono_mies"
-
-# baseDatos = myClient[MONGO_BASED]
-# coleccion = baseDatos [COLECCION]
-# coleccionPyC = baseDatos [COLECCION2]
-
 #Imagenes de fondo que se visualizan en cada ventana de tkinter
 logginFondo = "fondo_main.png"
 '''Fondo de la primera ventana'''
@@ -27,6 +18,16 @@ datosUsuarioFondo = "fondo_datos_user.png"
 adminFondo = "fondo_admin.png"
 '''Fondo de la ventana principal'''
 
+MONGO_BASED = "bono-mies-data"
+COLECCION_PERSONAS = "personas_bono_mies"
+COLECCION_PYC = "provincias_cantones"
+COLECCTION_ROLES = "roles_bono_mies"
+
+#COLECCION DE ENTIDADES
+ENTIDAD_PROVINCIA = "entidad_provincia"
+ENTIDAD_CANTON = "entidad_canton"
+ENTIDAD_COLEGIO = "entidad_colegio"
+ENTIDAD_PARROQUIA = "entidad_parroquia"
 
 class DbConnectionMeta(type):
     '''
@@ -104,6 +105,9 @@ class PageLoader():
         self.coleccionPersonas = self.baseDatos[COLECCION_PERSONAS]
         self.coleccionPyC = self.baseDatos[COLECCION_PYC]
         self.coleccionRoles = self.baseDatos [COLECCTION_ROLES]
+
+        '''ENTIDADES'''
+        self.entidadProvincia= self.baseDatos [ENTIDAD_PROVINCIA]
 
     def queryCedulas(self):
         '''
@@ -218,6 +222,21 @@ class PageLoader():
         return self.colecctioEstado
 
     def beneficariosUsuarios(self):
+        '''
+        Creación de array de la colección de los estados de los usuarios
+        ----
+        Return:
+        --------
+            return self.colecctioEstado
+                Retornar un array con los estados de la base de datos
+        '''
+        coleccionTotal = self.coleccionPersonas.distinct("beneficiario")
+        self.colecctioEstado=[]
+        for busqueda in coleccionTotal:
+            self.colecctioEstado.append(busqueda)
+        return self.colecctioEstado
+
+    def entidadProvinciaCRUD(self):
         '''
         Creación de array de la colección de los estados de los usuarios
         ----
